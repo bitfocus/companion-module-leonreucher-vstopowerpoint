@@ -1,0 +1,26 @@
+{
+	"id": "leonreucher-vstopowerpoint",
+	"name": "leonreucher-vstopowerpoint",
+	"shortname": "vstopowerpoint",
+	"description": "Module for controlling the Microsoft PowerPoint desktop application using a custom websocket plugin",
+	"version": "0.0.1",
+	"license": "MIT",
+	"repository": "git+https://github.com/bitfocus/companion-module-leonreucher-vstopowerpoint.git",
+	"bugs": "https://github.com/bitfocus/companion-module-leonreucher-vstopowerpoint/issues",
+	"maintainers": [
+		{
+			"name": "Leon Reucher",
+			"email": "leon.reucher@ultimate-technology.de"
+		}
+	],
+	"legacyIds": [],
+	"runtime": {
+		"type": "node18",
+		"api": "nodejs-ipc",
+		"apiVersion": "0.0.0",
+		"entrypoint": "../index.js"
+	},
+	"manufacturer": "Leon Reucher",
+	"products": ["PowerPoint Remote VSTO WebSocket"],
+	"keywords": ["PowerPoint", "Microsoft"]
+}
