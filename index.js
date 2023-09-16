@@ -48,7 +48,7 @@ class WebsocketInstance extends InstanceBase {
 			}
 			this.reconnect_timer = setTimeout(() => {
 				this.initWebSocket()
-			}, 5000)
+			}, 500)
 		}
 	}
 
