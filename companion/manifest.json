@@ -3,7 +3,7 @@
 	"name": "leonreucher-vstopowerpoint",
 	"shortname": "vstopowerpoint",
 	"description": "Module for controlling the Microsoft PowerPoint desktop application using a custom websocket plugin",
-	"version": "0.0.1",
+	"version": "1.0.0",
 	"license": "MIT",
 	"repository": "git+https://github.com/bitfocus/companion-module-leonreucher-vstopowerpoint.git",
 	"bugs": "https://github.com/bitfocus/companion-module-leonreucher-vstopowerpoint/issues",
