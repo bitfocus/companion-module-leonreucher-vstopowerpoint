@@ -52,6 +52,47 @@ class WebsocketInstance extends InstanceBase {
 		}
 	}
 
+	sendPing() {
+        if (this.ws && this.ws.readyState === 1) {
+			this.hasAnsweredPing = false;
+            this.ws.ping();
+			this.pingTimeout = setTimeout(() => {
+                if (!this.hasAnsweredPing) {
+					this.updateStatus(InstanceStatus.Disconnected, "Connection lost")
+					if(this.pingInterval) {
+						clearInterval(this.pingInterval);
+						this.pingInterval = null;
+					}
+                    this.maybeReconnect(); // Rufen Sie die maybeReconnect-Methode auf, wenn keine Pong empfangen wurde
+                }
+            }, 3000);
+        }
+    }
+
+	initializePingPong() {
+        this.pingInterval = setInterval(() => {
+            this.sendPing();
+			console.log("mooooin")
+        }, 3000);
+
+        this.ws.on('pong', () => {
+			console.log("Got Pong!")
+			this.hasAnsweredPing = true;
+        });
+    }
+
+	maybeReconnect() {
+		if (this.isInitialized && this.config.reconnect) {
+			if (this.reconnect_timer) {
+				clearTimeout(this.reconnect_timer)
+			}
+			this.reconnect_timer = setTimeout(() => {
+				this.initWebSocket()
+			}, 5000)
+		}
+	}
+
+
 	initWebSocket() {
 		if (this.reconnect_timer) {
 			clearTimeout(this.reconnect_timer)
@@ -74,6 +115,7 @@ class WebsocketInstance extends InstanceBase {
 
 		this.ws.on('open', () => {
 			this.updateStatus(InstanceStatus.Ok);
+			this.initializePingPong();
 		})
 		this.ws.on('close', (code) => {
 			this.updateStatus(InstanceStatus.Disconnected, `Connection closed with code ${code}`)
