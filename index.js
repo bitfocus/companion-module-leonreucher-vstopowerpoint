@@ -4,6 +4,7 @@ import { upgradeScripts } from './upgrade.js'
 import { setupActions } from './actions.js'
 import { setupFeedbacks } from './feedbacks.js'
 import { configFields } from './config.js'
+import { variables } from './variables.js';
 
 
 class WebsocketInstance extends InstanceBase {
@@ -12,10 +13,16 @@ class WebsocketInstance extends InstanceBase {
 	async init(config) {
 		this.config = config
 
+		this.setVariableDefinitions(variables);
+
 		this.slideShowActive = false;
 		this.totalSlideCount = 0;
 		this.currentSlide = 0;
 		this.fileName = "";
+
+		this.setVariableValues({
+            slideNotes: null
+        })
 
 		this.initWebSocket()
 		this.isInitialized = true
@@ -140,6 +147,11 @@ class WebsocketInstance extends InstanceBase {
 		if("currentSlide" in data) {
 			this.currentSlide = data.currentSlide;
 		}
+		if("slideNotes" in data) {
+            this.setVariableValues({
+                slideNotes: data.slideNotes
+            })
+        }
 		if("fileName" in data) {
 			this.fileName = data.fileName;
 			if(this.fileName == null) {
