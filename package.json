@@ -9,8 +9,8 @@
 	},
 	"license": "MIT",
 	"dependencies": {
-		"@companion-module/base": "~1.7.0",
-		"ws": "^8.16.0"
+		"@companion-module/base": "~1.10.0",
+		"ws": "^8.18.0"
 	},
 	"repository": {
 		"type": "git",
