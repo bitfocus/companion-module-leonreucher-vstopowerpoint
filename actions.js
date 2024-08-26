@@ -133,5 +133,110 @@ export function setupActions(instance) {
                 )
             },
         },
+        
+        blackout: {
+            name: "Control Blackout",
+            description: "Blackout/Whiteout/Show presentation",
+            options: [
+                {
+                    type: 'dropdown',
+                    label: 'Format',
+                    id: 'targetAction',
+                    default: "blackout",
+                    choices: [
+                        {id: "blackout", label: "Black Out"},
+                        {id: "whiteout", label: "White Out"},
+                        {id: "showPresentation", label: "Continue Presentation"},
+                    ]
+                },
+            ],
+            callback: async (action, context) => {
+                instance.ws.send(
+                    JSON.stringify({
+                        action: action.options.targetAction,
+                    })
+                )
+            },
+        },
+        hideUnhideSlide: {
+            name: "Hide/Unhide Slide",
+            description: "Hide a specific slide inside the slidedeck",
+            options: [
+                {
+                    type: 'number',
+                    label: 'Slide ID (starting at 1)',
+                    id: 'slideId',
+                    default: 1,
+                    min: 1,
+                    required: true
+                },
+                {
+                    type: 'dropdown',
+                    label: 'Format',
+                    id: 'targetAction',
+                    default: "hideSlide",
+                    choices: [
+                        {id: "hideSlide", label: "Hide"},
+                        {id: "unhideSlide", label: "Unhide"},
+                    ]
+                },
+            ],
+            callback: async (action, context) => {
+                instance.ws.send(
+                    JSON.stringify({
+                        action: action.options.targetAction,
+                        slideId: action.options.slideId
+                    })
+                )
+            },
+        },
+        unhideAllSlides: {
+            name: "Unhide all slides",
+            description: "Unhide all slides inside the slidedeck",
+            options: [],
+            callback: async (action, context) => {
+                instance.ws.send(
+                    JSON.stringify({
+                        action: "unhideAllSlides",
+                    })
+                )
+            },
+        },
+        toggleLaserPointer: {
+            name: "Control Laser Pointer",
+            description: "Show/Hide the laser pointer",
+            options: [
+                {
+                    type: 'dropdown',
+                    label: 'Action',
+                    id: 'targetAction',
+                    default: "showLaserPointer",
+                    choices: [
+                        {id: "showLaserPointer", label: "Show"},
+                        {id: "hideLaserPointer", label: "Hide"},
+                        {id: "toggleLaserPointer", label: "Toggle"},
+                    ]
+                },
+            ],
+            callback: async (action, context) => {
+                instance.ws.send(
+                    JSON.stringify({
+                        action: action.options.targetAction,
+                    })
+                )
+            },
+        },
+        eraseDrawings: {
+            name: "Erase drawings",
+            description: "Erase drawings on the active slide made by the presenter",
+            options: [],
+            callback: async (action, context) => {
+                instance.ws.send(
+                    JSON.stringify({
+                        action: "eraseDrawings",
+                    })
+                )
+            },
+        },
     })
 }

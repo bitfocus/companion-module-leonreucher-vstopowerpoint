@@ -19,6 +19,7 @@ class WebsocketInstance extends InstanceBase {
 		this.totalSlideCount = 0;
 		this.currentSlide = 0;
 		this.fileName = "";
+		this.mediaStatus = {};
 
 		this.setVariableValues({
             slideNotes: null
@@ -79,11 +80,9 @@ class WebsocketInstance extends InstanceBase {
 	initializePingPong() {
         this.pingInterval = setInterval(() => {
             this.sendPing();
-			console.log("mooooin")
         }, 3000);
 
         this.ws.on('pong', () => {
-			console.log("Got Pong!")
 			this.hasAnsweredPing = true;
         });
     }
@@ -157,6 +156,24 @@ class WebsocketInstance extends InstanceBase {
 			if(this.fileName == null) {
 				this.fileName = "---";
 			}
+		}
+		if("mediaStatus" in data) {
+			var mediaIndex = data.mediaId
+			if (!this.mediaStatus[mediaIndex]) {
+        		this.mediaStatus[mediaIndex] = {};
+    		}
+			this.mediaStatus[mediaIndex].status = data.mediaStatus
+			
+			if("elapsedTime" in data) {
+				this.mediaStatus[mediaIndex].elapsedTime = data.elapsedTime
+			}
+			if("totalLength" in data) {
+				this.mediaStatus[mediaIndex].totalLength = data.totalLength
+			}
+			if("remainingTime" in data) {
+				this.mediaStatus[mediaIndex].remainingTime = data.remainingTime
+			}
+			console.log(this.mediaStatus[mediaIndex])
 		}
 		this.checkFeedbacks();
 	}

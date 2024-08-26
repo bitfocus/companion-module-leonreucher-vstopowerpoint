@@ -72,5 +72,6 @@ export function setupFeedbacks(instance) {
                 return {text: instance.fileName};
             }
         },
+        
     })
 }

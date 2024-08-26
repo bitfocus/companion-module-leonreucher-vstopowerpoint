@@ -7,7 +7,7 @@ export const configFields = [
         width: 12,
         label: 'Information',
         value:
-            "An API token is needed for this module to be able to control the Teams instance - follow this URL to generate an API token and copy it to the field below: <br> <a href='https://support.microsoft.com/en-us/office/connect-to-third-party-devices-in-microsoft-teams-aabca9f2-47bb-407f-9f9b-81a104a883d6' target='_blank'>Generate API token</a>",
+            "This module requires an Office AddIn running inside PowerPoint. Please read the module documentation.",
     },
     {
         type: 'textinput',
