@@ -139,12 +139,21 @@ class WebsocketInstance extends InstanceBase {
 	parsePowerPointStatus(data) {
 		if("slideShowActive" in data) {
 			this.slideShowActive = data.slideShowActive;
+            this.setVariableValues({
+                slideShowActive: data.slideShowActive
+            })
 		}
 		if("totalSlideCount" in data) {
 			this.totalSlideCount = data.totalSlideCount;
+            this.setVariableValues({
+                totalSlideCount: data.totalSlideCount
+            })
 		}
 		if("currentSlide" in data) {
 			this.currentSlide = data.currentSlide;
+            this.setVariableValues({
+                currentSlide: data.currentSlide
+            })
 		}
 		if("slideNotes" in data) {
             this.setVariableValues({
@@ -156,6 +165,9 @@ class WebsocketInstance extends InstanceBase {
 			if(this.fileName == null) {
 				this.fileName = "---";
 			}
+            this.setVariableValues({
+                fileName: this.fileName
+            })
 		}
 		if("mediaStatus" in data) {
 			var mediaIndex = data.mediaId
