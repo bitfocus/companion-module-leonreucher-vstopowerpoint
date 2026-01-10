@@ -82,13 +82,37 @@ export function setupActions(instance) {
                     id: 'targetSlide',
                     default: 1,
                     min: 1,
-                    required: true
+                    required: true,
                 }
             ],
             callback: async (action, context) => {
                 instance.ws.send(
                     JSON.stringify({
                         currentSlide: action.options.targetSlide
+                    })
+                )
+            },
+        },
+        goToSpecificSlide: {
+            name: "Go to slide (Expression)",
+            description: "Switch to a specific slide",
+            options: [
+                {
+                    type: 'textinput',
+                    label: 'Slide number',
+                    id: 'targetSlide',
+                    useVariables: true 
+                }
+            ],
+            callback: async (event, context) => {
+                let slideNumber = await context.parseVariablesInString(event.options.targetSlide || '');
+                if(!slideNumber) {
+                    return;
+                }
+
+                instance.ws.send(
+                    JSON.stringify({
+                        currentSlide: parseInt(slideNumber)
                     })
                 )
             },
