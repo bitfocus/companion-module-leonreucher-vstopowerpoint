@@ -31,3 +31,11 @@ In the module configuration, enter the IP address of the PC running the PowerPoi
 - Specific slide is shown
 - Current/Total slide number
 - Filename of the currently active presentation
+
+### Variables
+
+- `slideNotes`: The notes for the current slide.
+- `currentSlide`: The current slide number.
+- `totalSlideCount`: The total number of slides in this presentation.
+- `slideShowActive`: Whether the current slide show is active or not (in presentation mode).
+- `fileName`: The file name of the presentation loaded. `---` substituted if empty.
